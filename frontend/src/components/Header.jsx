@@ -4,45 +4,57 @@ import { Link, useNavigate } from "react-router-dom";
 const Header = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
 
+  // call the logout function passed from App.jsx and redirect to login page
   const handleLogout = () => {
     onLogout();
     navigate("/login");
   };
 
   return (
-    <header className="bg-white shadow-md py-4 px-6">
-      <nav className="flex items-center justify-between">
-        <Link
-          to="/"
-          className="text-xl font-bold text-blue-600 hover:text-blue-800 transition-colors"
-        >
-          Dashboard
+    <header className="bg-white shadow-md p-4">
+      <nav className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold text-blue-600">
+          Wellness Platform
         </Link>
-        <div className="flex items-center space-x-4">
+        <ul className="flex items-center space-x-4">
+          <li>
+            <Link
+              to="/"
+              className="text-gray-600 hover:text-blue-600 transition duration-300"
+            >
+              Dashboard
+            </Link>
+          </li>
           {isLoggedIn ? (
             <>
-              <Link
-                to="/my-sessions"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                My Sessions
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
-              >
-                Logout
-              </button>
+              <li>
+                <Link
+                  to="/my-sessions"
+                  className="text-gray-600 hover:text-blue-600 transition duration-300"
+                >
+                  My Sessions
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300"
+                >
+                  Logout
+                </button>
+              </li>
             </>
           ) : (
-            <Link
-              to="/login"
-              className="text-gray-700 hover:text-blue-600 transition-colors"
-            >
-              Login
-            </Link>
+            <li>
+              <Link
+                to="/login"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+              >
+                Login
+              </Link>
+            </li>
           )}
-        </div>
+        </ul>
       </nav>
     </header>
   );

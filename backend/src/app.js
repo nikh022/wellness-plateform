@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Updated paths to be relative to the server.js file within the src folder
 const authRoutes = require("./routes/userRoutes");
 const sessionRoutes = require("./routes/wellnessSessionRoutes");
 

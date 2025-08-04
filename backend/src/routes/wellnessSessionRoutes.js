@@ -1,19 +1,24 @@
 const express = require("express");
+const router = express.Router();
+const jwtAuth = require("../middleware/jwtAuth");
+
 const {
-  getPublicSessions,
-  getMySessions,
-  getSession,
   saveDraft,
   publishSession,
+  getMySessions,
+  getSession,
+  getPublicSessions,
+  deleteSession,
 } = require("../controllers/wellnessSessionController");
-const auth = require("../middleware/jwtAuth");
 
-const router = express.Router();
-
+// Public route to get all published sessions
 router.get("/sessions", getPublicSessions);
-router.get("/my-sessions", auth, getMySessions);
-router.get("/my-sessions/:id", auth, getSession);
-router.post("/my-sessions/save-draft", auth, saveDraft);
-router.post("/my-sessions/publish/:id", auth, publishSession);
+
+// Protected routes for a logged-in user
+router.get("/my-sessions", jwtAuth, getMySessions);
+router.get("/my-sessions/:id", jwtAuth, getSession);
+router.post("/my-sessions/save-draft", jwtAuth, saveDraft);
+router.post("/my-sessions/publish/:id", jwtAuth, publishSession);
+router.delete("/my-sessions/:id", jwtAuth, deleteSession); // <-- New route for deleting a session
 
 module.exports = router;

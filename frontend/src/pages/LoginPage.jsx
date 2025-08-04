@@ -24,7 +24,6 @@ const LoginPage = ({ onLogin }) => {
       navigate("/");
     } catch (error) {
       console.error("Authentication failed", error);
-      // You can add state here to display an error message to the user
     }
   };
 
